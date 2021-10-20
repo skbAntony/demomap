@@ -29,6 +29,7 @@
     color: #fff;
     font-size: 24px;
   }
+  
   </style>
 </head>
 <body>
@@ -41,28 +42,29 @@
       <header>
         <h1>查詢口罩數量</h1>
         <div class="search">
-          <input type="text" placeholder="搜尋藥局">
-          <label for=""></label>
+          <input type="text" placeholder="搜尋藥局名稱" class='search_input' v-model="search_input">
+          <label for="" @click='search'><i class="fa fa-search" aria-hidden="true"></i></label>
         </div>
         <div class="filter">
           <div class="checkboxes">
-              <input type="checkbox" name="mask" id="adult" class="checkbox">
+              <input type="checkbox" name="mask" id="adult" class="checkbox" 
+              :class="{active: checkboxes[0] === true}" v-model="checkboxes[0]">
               <label for="adult">成人口罩</label>
-              <input type="checkbox" name="mask" id="child" class="checkbox">
+              <input type="checkbox" name="mask" id="child" class="checkbox" 
+              :class="{active: checkboxes[1] === true}" v-model="checkboxes[1]">
               <label for="child">兒童口罩</label>
           </div>
-          <select name="place" class="place">
-              <option class="option" value="1000">1公里</option>
-              <option class="option" value="5000">5公里</option>
-              <option class="option" value="10000">10公里</option>
+          <p>選擇縣市</p>
+          <select name="areas" class="areas" v-model="selected">
+              <option v-for="index in areas" class="option">{{index}}</option>
           </select>
         </div>
       </header>
       <section>
         <ul class="list">
-          <li v-for="index in data">
+          <li v-for="index in data" @click='list_data(index)'>
               <h2>{{index.properties.name}}</h2>
-              <div>公尺</div>
+              <!-- <div>公尺</div> -->
               <div class="mask">
                   <div class="adult">成人口罩：<span>{{index.properties.mask_adult}}</span></div>
                   <div class="child">兒童口罩：<span>{{index.properties.mask_child}}</span></div>
