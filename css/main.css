@@ -1,0 +1,209 @@
+
+.header {
+    display: flex;
+    padding: 6px 10px;
+    background-color: #000;
+    position: relative;
+}
+.header .logo {
+    /* display: inline-block; */
+    padding: 6px 0;
+}
+.header .logo img {
+    width: 80px;
+    height: 40px;
+}
+.header nav {
+    text-align: right;
+    width: 100%;
+    font-size: 0;
+}
+.header nav a {
+    display: inline-block;
+    color: burlywood;
+    line-height: 52px;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 0px 6px;
+}
+/* .header nav a > .fa {
+    transform: scale(0);
+    transition: .3s;
+}
+.header nav a:hover .fa {
+    background-color:yellow;
+    transform: scale(1);
+} */
+.fade {
+    transition: opacity 0.125s linear;
+}
+.main {
+    width: 100%;
+    height: 100vh;
+}
+.main a {
+    text-decoration: none;
+    color:rgba(0,0,0,0.79);
+}
+.main .content a:hover,
+.main .footer a:hover {
+    color: #FFA042;
+}
+.main .marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-bottom: 0px;
+}
+.main .marquee span {
+    display: inline-block;
+    padding-left: 100%; 
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    animation: marquee 20s linear infinite, neon-shine 2s linear infinite;
+}
+@keyframes neon-shine{
+    0%{opacity:1;}
+    17%{color:#ff9900;}
+    34%{color:#fff700;}
+    51%{color:#1eff00;}
+    68%{color:#00f7ff;}
+    75%{color:#0d00ff;}
+    100%{color:#8c00ff;}
+}
+/* Make it move */
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+.main .content {
+    background-color: #FFFFB9;
+    padding-bottom: 10px;
+}
+.content .nav-tabs .nav-link.active {
+    background-color: #FFDC35;
+}
+.container-fluid {
+    padding: 0px;
+}
+.container-fluid .carousel-item img,
+.drink > .col-4 img {
+    width: 100%;
+    vertical-align: middle;
+}
+.pic {
+    position: relative;
+}
+.tab-content {
+    padding-top: 20px;
+}
+.footer {
+    background-color: #BBFFBB;
+    padding-top:30px;
+}
+.footer h3 {
+    border-bottom: 1px dotted #000;
+    padding-bottom: 20px;
+}
+.footer ul {
+    padding: 0px;
+}
+ul li {
+    list-style-type: none;
+    margin: 20px 0;
+}
+.copyright {
+    background-color: #28FF28;
+}
+table tr td:nth-child(2){
+    padding-left: 20px;
+}
+.header .menu_nav {
+    display: none;
+}
+@media screen and (max-width:768px) { 
+    .header nav {
+        display: none;
+    }
+    .main-content {
+        position: relative;
+    }
+    .header .menu_nav {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        width: 300px;
+        height: 100vh;
+        background-color: yellowgreen;
+        transform: translateX(100%);
+        transition: .65s;
+    }
+    .header .menu_nav .menu_nav_content {
+        height: 70%;
+        padding-top: 140px;
+    }
+    .header .menu_nav .menu_nav_a {
+        display: flex;
+        flex-direction: column;
+    }
+    .header .menu_nav .menu_nav_a a {
+        font-size: 26px;
+        color: #fff;
+        border-bottom: 2px solid #fff;
+        padding-left: 20px;
+    }
+    .header .menu_nav .menu_nav_a a:hover i {
+        display: inline-block;
+    }
+    .header .menu_nav .menu_nav_a a i {
+        display: none;
+    }
+    .header .menu_nav.close {
+        transform: translateX(0%);
+    }
+    .header .hanburger {
+        position: absolute;
+        z-index: 3;
+        width: 6.5%;
+        height: 78%;
+        display: block;
+        top: 8px;
+        right: 30px;
+    }
+    .header .hanburger:hover {
+        cursor: pointer;
+    }
+    .header .hanburger .hanburger_inner span {
+        position: absolute;
+        z-index: 2;
+        height: 6px;
+        width: 37px;
+        background-color: #fff;
+        top: 12px;
+        right: 5px;
+        border-radius: 6%;
+        transition: .5s;
+    }
+    .header .hanburger .hanburger_inner span:nth-child(2) {
+        top: 23px;
+    }
+    .header .hanburger .hanburger_inner span:nth-child(3) {
+        top: 34px;
+    }
+    .header .hanburger.close .hanburger_inner span:nth-child(1) {
+        display:none;
+    }
+    .header .hanburger.close .hanburger_inner span:nth-child(2) {
+        transform: rotate(45deg);
+    }
+    .header .hanburger.close .hanburger_inner span:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 23px;
+    }
+}
+@media screen and (max-width:576px) {
+
+}

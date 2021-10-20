@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+  <script src="js/index.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <title>Document</title>
+  <style type="text/css">
+  </style>
+</head>
+<body>
+    <article class="main">
+
+        <header>
+            <figure><a href="/laraveldemo/demo"><img src="images/logo.jpg" alt="logo"></a></figure>
+            <nav><a v-for="nav in navs"><i :class="nav.class" :aria-hidden="nav.aria_hidden"></i>{{nav.title}}</a></nav>
+        </header>
+
+        <div class="container-fluid">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                  <div v-for="index in carousel" class="carousel-item"></div>
+              </div>
+            </div>
+        </div>
+
+        <p class="marquee"><span>歡迎光臨，文字跑馬燈效果</span></p>
+
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+                      side project
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+                        Profile
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
+                        Contact
+                    </button>
+                </li>
+              </ul>
+
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-4">
+                            <img src='https://picsum.photos/100/100?random=31' alt="">
+                            <p>口罩地圖</p>
+                            <a href="/laraveldemo/demo/map.html">網址連結</a>
+                        </div>
+                        <div class="col-4">
+                            <img src='https://picsum.photos/100/100?random=32' alt="">
+                            <p></p>
+                        </div>
+                        <div class="col-4">
+                            <img src='https://picsum.photos/100/100?random=33' alt="">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    456
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    789
+                </div>
+            </div>
+        </div>
+    </article>
+  <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</body>
+</html>

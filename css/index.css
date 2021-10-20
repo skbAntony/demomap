@@ -1,0 +1,70 @@
+body {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+}
+.main header {
+    height: 50px;
+    background-color: yellowgreen;
+    display: flex;
+    align-items: center;
+}
+.main header figure {
+    width: 50%;
+    margin: 0;
+    margin-left: 10px;
+}
+.main header nav {
+    width: 50%;
+    text-align: right;
+    color: #fff;
+}
+.main header nav a {
+    padding: 0 10px;
+}
+.main header img {
+    width: 70px;
+    height: 20px;
+}
+.main .container-fluid {
+    padding: 0;
+}
+.main .container {
+    background-color: #FFFFB9;
+    padding-bottom: 10px;
+    height: 200px;
+}
+.main .container .nav-tabs .nav-link.active {
+    background-color: #FFDC35;
+}
+.main .container .col-4 {
+    text-align: center;
+}
+.main .marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-bottom: 0px;
+}
+.main .marquee span {
+    display: inline-block;
+    padding-left: 100%; 
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    animation: marquee 20s linear infinite, neon-shine 2s linear infinite;
+}
+@keyframes neon-shine{
+    0%{opacity:1;}
+    17%{color:#ff9900;}
+    34%{color:#fff700;}
+    51%{color:#1eff00;}
+    68%{color:#00f7ff;}
+    75%{color:#0d00ff;}
+    100%{color:#8c00ff;}
+}
+/* Make it move */
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
