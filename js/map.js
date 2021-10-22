@@ -28,14 +28,37 @@ $(function() {
 
             // 勾選目前還有賣大人小孩的口罩
             checkboxes: [false, false],
+
+            // 營業時間
+            available: [],
         },
     
         methods: {
+            open_side: function(i) {
+                if (i == 1) {
+                    if ($('.open > label > i').hasClass('fa-arrow-left')) {
+                        $('aside').css('transform', 'translateX(-100%)');
+                        $('.open').css('left', '0');
+                        $('.open > label > i').removeClass("fa-arrow-left");
+                        $('.open > label > i').addClass("fa-arrow-right");
+                    } else {
+                        $('aside').css('transform', 'translateX(0%)');
+                        $('.open').css('left', 'var(--asidewidth)');
+                        $('.open > label > i').removeClass("fa-arrow-right");
+                        $('.open > label > i').addClass("fa-arrow-left");
+                    }
+                } else {
+                    $('aside').css('transform', 'translateX(-100%)');
+                    $('.open').css('left', '0');
+                    $('.open > label > i').removeClass("fa-arrow-left");
+                    $('.open > label > i').addClass("fa-arrow-right");
+                }
+            },
             geticon: function (type) {
                 return L.icon({
-                    // iconUrl: `http://localhost/laraveldemo/demo/demomap/images/mark-${type}.png`,
+                    iconUrl: `http://localhost/laraveldemo/demo/demomap/images/mark-${type}.png`,
                     // github   
-                    iconUrl: `https://skbantony.github.io/demomap/images/mark-${type}.png`,    
+                    // iconUrl: `https://skbantony.github.io/demomap/images/mark-${type}.png`,    
                     iconSize: [66, 90],
                     iconAnchor: [33, 90], // point of the icon which will correspond to marker's location
                     popupAnchor: [0, -80] // point from which the popup should open relative to the iconAnchor
@@ -68,6 +91,7 @@ $(function() {
                     }
                     this.usermarker = L.marker([e.latlng.lat, e.latlng.lng], { icon: this.geticon('blue') });
                     this.map.addLayer(this.usermarker);
+                    this.open_side(2);
                 });
                 // 手機使用單擊移動使用者位置
                 // map.on('click', (e) => {
@@ -95,6 +119,7 @@ $(function() {
                         }
                         this.usermarker = L.marker([e.latlng.lat, e.latlng.lng], { icon: this.geticon('blue') });
                         this.map.addLayer(this.usermarker);
+                        console.log(this.data[i].properties);
                     });
                     // 放入 marker cluster
                     this.storeMarkers.addLayer(this.data[i].marker);
@@ -124,6 +149,7 @@ $(function() {
                         that.areas = result;
                         that.addmarkers();
                         that.loading = false;
+                        console.log(data.features[0]);
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         console.log(XMLHttpRequest, textStatus, errorThrown);
@@ -164,12 +190,14 @@ $(function() {
                 }
                 this.usermarker = L.marker([lat, lng], { icon: this.geticon('blue') });
                 this.map.addLayer(this.usermarker);
+                this.open_side(2);
             },
         },
     
         mounted: function() {
             this.openmap();
             this.getdata();
+            
         },
     
     });

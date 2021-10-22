@@ -38,6 +38,9 @@
       <div class="loader-inner pacman"></div>
       <div>資料讀取中</div>
     </div>
+    <div class="open" @click='open_side(1)'>
+      <label for=""><i class="fa fa-arrow-left" aria-hidden="true"></i></label>
+    </div>
     <aside>
       <header>
         <h1>查詢口罩數量</h1>
@@ -64,7 +67,6 @@
         <ul class="list">
           <li v-for="index in data" @click='list_data(index)'>
               <h2>{{index.properties.name}}</h2>
-              <!-- <div>公尺</div> -->
               <div class="mask">
                   <div class="adult">成人口罩：<span>{{index.properties.mask_adult}}</span></div>
                   <div class="child">兒童口罩：<span>{{index.properties.mask_child}}</span></div>
