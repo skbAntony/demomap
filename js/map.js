@@ -11,6 +11,7 @@ $(function() {
             // 所有藥局的資料
             data: [],
             search_data: [],
+            detail_data: true,
             
             // 選擇地址的地區
             selected: null,
@@ -56,9 +57,9 @@ $(function() {
             },
             geticon: function (type) {
                 return L.icon({
-                    // iconUrl: `http://localhost/laraveldemo/demo/demomap/images/mark-${type}.png`,
+                    iconUrl: `http://localhost/laraveldemo/demo/demomap/images/mark-${type}.png`,
                     // github   
-                    iconUrl: `https://skbantony.github.io/demomap/images/mark-${type}.png`,    
+                    // iconUrl: `https://skbantony.github.io/demomap/images/mark-${type}.png`,    
                     iconSize: [66, 90],
                     iconAnchor: [33, 90], // point of the icon which will correspond to marker's location
                     popupAnchor: [0, -80] // point from which the popup should open relative to the iconAnchor
@@ -93,6 +94,22 @@ $(function() {
                     this.map.addLayer(this.usermarker);
                     this.open_side(2);
                 });
+                
+                this.map.on('click', (e) => {
+                    // 取得經緯度
+                    this.lat = e.latlng.lat;
+                    this.lng = e.latlng.lng;
+                    // 把地圖中心移動到點擊位置
+                    this.map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng));
+                    // 第二次點擊的位置後會先刪除已點擊過的位置
+                    if (this.usermarker !== null) {
+                        this.map.removeLayer(this.usermarker);
+                    }
+                    this.usermarker = L.marker([e.latlng.lat, e.latlng.lng], { icon: this.geticon('blue') });
+                    this.map.addLayer(this.usermarker);
+                    this.open_side(2);
+                });
+                
                 // 手機使用單擊移動使用者位置
                 // map.on('click', (e) => {
 
@@ -119,7 +136,19 @@ $(function() {
                         }
                         this.usermarker = L.marker([e.latlng.lat, e.latlng.lng], { icon: this.geticon('blue') });
                         this.map.addLayer(this.usermarker);
-                        console.log(this.data[i].properties);
+                    });
+                    this.data[i].marker.on('click', (e) => {
+                        // 取得經緯度
+                        this.lat = e.latlng.lat;
+                        this.lng = e.latlng.lng;
+                        // 把地圖中心移動到點擊位置
+                        this.map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng));
+                        // 第二次點擊的位置後會先刪除已點擊過的位置
+                        if (this.usermarker !== null) {
+                            this.map.removeLayer(this.usermarker);
+                        }
+                        this.usermarker = L.marker([e.latlng.lat, e.latlng.lng], { icon: this.geticon('blue') });
+                        this.map.addLayer(this.usermarker);
                     });
                     // 放入 marker cluster
                     this.storeMarkers.addLayer(this.data[i].marker);
