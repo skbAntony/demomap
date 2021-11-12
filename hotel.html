@@ -8,20 +8,355 @@
   <script src="js/hotel.js" type="text/javascript"></script>
   <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.css">
   <link rel="stylesheet" href="css/hotel.css">
+  <link rel="stylesheet" href="css/loading.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <title>Document</title>
+  <title>reservation</title>
   <style type="text/css">
+    :root {
+      --asideleft: 300px;
+    }
+    body {
+      height: 100%;
+      width: 100%;
+    }
+    .slideMenu {
+      width: var(--asideleft);
+      height: 100vh;
+      background-color: #fff;
+      position: fixed;
+      z-index: 2;
+      top: 0;
+      transition: transform .5s;
+    }
+    .slide_untodo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: rgb(0, 255, 13);
+      cursor: pointer;
+    }
+    .slideMenu h1 {
+      font-family: Futwora Pro Trial Bold;
+      padding: 0 0.5em;
+      margin: 50px 0;
+    }
+    .slideMenu a {
+      font-family: Futwora Pro Trial Bold;
+      color: #666;
+      text-decoration: none;
+      padding: 0.5em 0;
+      padding-left: 2em;
+    }
+    .menu_detail {
+      position: absolute;
+      bottom: 50px;
+      left: 30px;
+      font-family: Futwora Pro Trial Medium;
+      color: #666;
+      border-spacing: 10px 2px;
+      border-collapse:separate;
+    }
+    .room h2 {
+      color: #8c9a65;
+    }
+    .wrap {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      padding-left: var(--asideleft);
+      width: 100%;
+      height: 100vh;
+    }
+    .rooms {
+      position: relative;
+    }
+    .rooms_img {
+      width: 100%;
+      height: 50vh;
+      position: relative;
+    }
+    .rooms img {
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+    }
+    .rooms .text {
+      /* position: absolute;
+      z-index: 1;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 140px;
+      background-color: hsla(0,0%,40%,.6);
+      color: #fff; */
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-align: center;
+    }
+    .rooms:hover .more {
+      /* visibility: initial;
+      opacity: 1; */
+    }
+    
+    .rooms:hover .text {
+      /* transition: background-color .3s;
+      background-color: hsla(0,0%,40%, .3); */
+    }
 
-  
+    .text h1 {
+      font-size: 26px;
+      font-family: Futwora Pro Trial Regular;
+      letter-spacing: .96px;
+    }
+    .detail_text {
+      margin-top: 60px;
+      text-align: center;
+    }
+    .detail_text p {
+      font-family: Futwora Pro Trial Medium;
+      letter-spacing: .64px;
+      font-size: 20px;
+      margin-bottom: 36px;
+    }
+    .detail_text p:nth-child(odd) {
+      margin: 0;
+    }
+    .more {
+      margin-top: 80px;
+      border: 3px solid #fff;
+      text-align: center;
+      padding: 8px 20px;
+      opacity: 0;
+      transition: opacity .3s,visibility .3s;
+      color: #fff;
+    }
+    .more:hover {
+      cursor: pointer;
+    }
+    
+    /* .loading {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      background-color: #fff;
+    } */
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
+    }
+    .fade-enter-to, .fade-leave /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 1;
+    }
+    .room .room_detail {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 54px 20px;
+      width: 100%;
+    }
+    .amenities .active {
+      opacity: 1;
+    }
+    .amenities .noactive {
+      opacity: .3;
+      text-decoration:line-through;
+    }
+    .descriptionShort {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .descriptionShort .item {
+      margin-bottom: 18px;
+    }
+    .amenities {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .amenities > div {
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+    }
+    .description {
+      color: #8c9a65;
+      padding-right: 30px;
+    }
+    .room {
+      display: flex;
+      padding-left: var(--asideleft);
+      width: 100%;
+      position: relative;
+      height: 100%;
+      flex-direction: column;
+    }
+    .room_img {
+      width: 100%;
+    }
+    .room_img img {
+      width: 100vw;
+      height: 640px;
+      display: block;
+      position: relative;
+    }
+    .room_data {
+      position: relative;
+    }
+    .room_data h2 {
+      position: absolute;
+      display: block;
+      font-size: 50px;
+      line-height: 60px;
+      font-family: Futwora Pro Trial Bold;
+      color: #8c9a65;
+      letter-spacing: 2px;
+      margin-top: -30px;
+      top: 0;
+      text-shadow: 0 -1px 0 #fffc97;
+    }
+    .item_title {
+      opacity: .5;
+    }
+    body::-webkit-scrollbar {
+      display:none;
+    }
+    @media only screen and (max-width: 768px) { 
+      .room .room_detail {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+    @media only screen and (max-width: 576px) { 
+
+    }
   </style>
 </head>
 <body>
   <div id="vue">
-
+    <aside class='slideMenu'>
+      <h1>Hotel</h1>
+      <a :href='url'>Home</a>
+      <label class='slide_untodo' @click="page_click">上一頁</label>
+      <table class='menu_detail'>
+        <tr>
+          <td><i class="fa fa-phone" aria-hidden="true"></i></td>
+          <td>0912 345 678</td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-envelope-o" aria-hidden="true"></i></td>
+          <td>Hotels@hotels.com</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Reservation Opening Hours</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Weekday 8am – 8pm</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Weekend 9am – 6pm</td>
+        </tr>
+      </table>
+    </aside>
+    <transition name="fade">
+      <main class="wrap" v-show='isShow'>
+        <!-- <div class="loading" v-if="loading === true">
+          <div class="loader-inner pacman"></div>
+          <div>資料讀取中</div>
+        </div> -->
+        <section class="rooms" v-for='(index, key) in api_data'>
+          <article class="rooms_img">
+            <img :src="index.imageUrl" alt="">
+          </article>
+          <article class="text">
+            <h1>{{index.name}}</h1>
+            <div class="detail_text">
+              <p>Weekday Rate</p>
+              <p>$ {{index.normalDayPrice}} TWD / night</p>
+              <p>Weekend Rate</p>
+              <p>$ {{index.holidayPrice}} TWD / night</p>
+              <div class='more' @mouseover="more_mouseover" @mouseout="more_mouseout" @click="more_click(index.id)">
+                <strong>more</strong>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </transition>
+    <transition name="fade">
+      <div class="room" v-show='!isShow'>
+        <div class="room_img">
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div v-for='(index, key) in room.imageUrl' :class="key === 0 ? 'carousel-item active' : 'carousel-item'">
+                <img :src="index" alt="...">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="room_check">
+          <div class="inputInfoContent">
+            
+          </div>
+        </div> -->
+        <div class="room_data">
+          <h2>{{room.name}}</h2>
+          <div class='room_detail'>
+            <div class="description">
+              <p>{{room.description}}</p>
+            </div>
+            <div class="descriptionShort">
+              <div class="item" v-for='(index, key) in descriptionShort'>
+                <div class="item_title">
+                  {{descriptionShort_text[key]}}
+                </div>
+                <div class="item_text">
+                  {{index}}
+                </div>
+              </div>
+            </div>
+            <div class="amenities">
+              <div v-for='(index,key) in room.amenities' :class="index ? 'active' : 'noactive'">
+                <i :class="'fa fa-' + amenities_img[key]" aria-hidden="true"></i>{{key}}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+        
+          <!-- <div v-for='index in room.imageUrl'>
+            <p>{{index}}</p>
+          </div> -->
+    </transition>
   </div>
+  <script>
+    // var elem = document.getElementById("animate"); 
+    // var left = 0;
+    // var bound = false;
+    
+    // requestAnimationFrame(Move);
+
+    // function Move() {
+    //   console.log(123);
+    //     if(left === 0 || left === 350) {
+    //         bound = !bound;
+    //     }
+    //     (bound) ? left++ : left--;
+    //     elem.style.left = left + 'px'; 
+    //     window.requestAnimationFrame(Move);
+    // }
+  </script>
   <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/loading.js"></script>
 </body>
 </html>
