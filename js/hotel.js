@@ -29,6 +29,8 @@ $(function() {
             loading: false,
             url: null,
             isShow: true,
+            isLabel: false,
+            loading: true,
 
             room: {},
             descriptionShort_text: [],
@@ -40,6 +42,9 @@ $(function() {
         watch: {
             error: function() {
                 alert('Data source error');
+            },
+            loading: function() {
+                
             }
         },
         computed: {},
@@ -63,6 +68,7 @@ $(function() {
             },
             more_click: function(id) {
                 this.isShow = false;
+                this.isLabel = true;
                 var that = this;
                 document.querySelector('.slideMenu').style.cssText = 'transform: translateX(calc(-100% + 50px)); background-color: #8c9a65;';
                 document.querySelector('.room').style.cssText = 'padding-left: 49px';
@@ -103,6 +109,7 @@ $(function() {
                     this.descriptionShort = [];
                     this.descriptionShort_text = [];
                     this.isShow = true;
+                    this.isLabel = false;
                     document.querySelector('.slideMenu').style.cssText = 'transform: translateX(0%);background-color: #fff;';
                     document.querySelector('.room').style.cssText = 'padding-left: var(--asideleft)';
                 }
@@ -114,7 +121,9 @@ $(function() {
             var that = this;
             this.getRoom({headers:this.headers}).then(function(resp){
                 that.api_data = resp.data.items;
-                that.loading = true;
+                setTimeout(function(){
+                    that.loading = false;
+                },1000);
             }).catch(function(err){
                 that.error = true;
             });  

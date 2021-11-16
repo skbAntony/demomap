@@ -19,6 +19,9 @@
       height: 100%;
       width: 100%;
     }
+    #vue {
+      position: relative;
+    }
     .slideMenu {
       width: var(--asideleft);
       height: 100vh;
@@ -94,16 +97,22 @@
       position: absolute;
       top: 0;
       left: 0;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      color: #fff;
     }
     .rooms:hover .more {
-      /* visibility: initial;
-      opacity: 1; */
+      visibility: initial;
+      opacity: 1;
     }
     
     .rooms:hover .text {
-      /* transition: background-color .3s;
-      background-color: hsla(0,0%,40%, .3); */
+      transition: background-color .3s;
+      background-color: hsla(0,0%,40%, .5);
     }
 
     .text h1 {
@@ -146,13 +155,15 @@
       background-color: #fff;
     } */
     .fade-enter-active, .fade-leave-active {
-      transition: opacity .5s;
+      transition: transform .5s;
     }
     .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-      opacity: 0;
+      /* opacity: 0; */
+      transform: translate(100%, 0);
     }
     .fade-enter-to, .fade-leave /* .fade-leave-active below version 2.1.8 */ {
-      opacity: 1;
+      /* opacity: 1; */
+      transform: translate(-100%, 0);
     }
     .room .room_detail {
       display: grid;
@@ -225,10 +236,46 @@
     body::-webkit-scrollbar {
       display:none;
     }
-    @media only screen and (max-width: 768px) { 
-      .room .room_detail {
-        grid-template-columns: repeat(1, 1fr);
+    .loading {
+      background-color: rgb(4, 255, 117);
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: rgb(154, 19, 245);
+      font-size: 24px;
+    }
+    @media only screen and (max-width: 1300px) { 
+      #vue {
+        display: flex;
+        flex-direction: column;
       }
+      .slideMenu {
+        height: 160px; 
+        position: relative;
+        width: 100%;
+      }
+      .slideMenu h1 {
+        margin: 26px 0;
+      }
+      .menu_detail {
+        top: 20px;
+        left: 120px;
+      }
+      .wrap {
+        grid-template-columns: repeat(1,1fr);
+        padding-left: unset;
+        transition: 1s;
+      }
+    }
+    @media only screen and (max-width: 768px) { 
+      
     }
     @media only screen and (max-width: 576px) { 
 
@@ -240,7 +287,7 @@
     <aside class='slideMenu'>
       <h1>Hotel</h1>
       <a :href='url'>Home</a>
-      <label class='slide_untodo' @click="page_click">上一頁</label>
+      <label v-show='isLabel' class='slide_untodo' @click="page_click">上一頁</label>
       <table class='menu_detail'>
         <tr>
           <td><i class="fa fa-phone" aria-hidden="true"></i></td>
@@ -264,12 +311,12 @@
         </tr>
       </table>
     </aside>
+    <div class="loading" v-if="loading === true">
+      <div class="loader-inner pacman"></div>
+      <div>資料讀取中</div>
+    </div>
     <transition name="fade">
       <main class="wrap" v-show='isShow'>
-        <!-- <div class="loading" v-if="loading === true">
-          <div class="loader-inner pacman"></div>
-          <div>資料讀取中</div>
-        </div> -->
         <section class="rooms" v-for='(index, key) in api_data'>
           <article class="rooms_img">
             <img :src="index.imageUrl" alt="">
@@ -295,7 +342,7 @@
           <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div v-for='(index, key) in room.imageUrl' :class="key === 0 ? 'carousel-item active' : 'carousel-item'">
-                <img :src="index" alt="...">
+                <img :src="index" alt="">
               </div>
             </div>
           </div>
