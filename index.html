@@ -15,12 +15,10 @@
 </head>
 <body>
     <article class="main">
-
         <header>
             <figure><a href="/laraveldemo/demo"><img src="images/logo.jpg" alt="logo"></a></figure>
             <nav><a v-for="nav in navs"><i :class="nav.class" :aria-hidden="nav.aria_hidden"></i>{{nav.title}}</a></nav>
         </header>
-
         <div class="container-fluid">
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
               <div class="carousel-inner">
@@ -28,7 +26,6 @@
               </div>
             </div>
         </div>
-
         <p class="marquee"><span>歡迎光臨，文字跑馬燈效果</span></p>
 
         <div class="container">
@@ -39,7 +36,7 @@
                       side project
                     </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
                         Profile
                     </button>
@@ -48,7 +45,7 @@
                     <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
                         Contact
                     </button>
-                </li>
+                </li> -->
               </ul>
 
               <div class="tab-content" id="myTabContent">
@@ -57,14 +54,15 @@
                         <div class="col-4">
                             <img src='https://picsum.photos/100/100?random=31' alt="">
                             <p>口罩地圖</p>
-                            <a href="/laraveldemo/demo/demomap/map.html">網址連結</a>
+                            <!-- <a href="/laraveldemo/demo/demomap/map.html">網址連結</a> -->
                             <!-- github -->
-                            <!-- <a href="/map.html">網址連結</a> -->
+                            <a href="/map.html">網址連結</a>
                         </div>
                         <div class="col-4">
                             <img src='https://picsum.photos/100/100?random=32' alt="">
-                            <p>番茄時鐘</p>
-                            <a href="/laraveldemo/demo/demomap/pomodoro_clock.html">網址連結</a>
+                            <p>房屋介紹網站</p>
+                            <!-- <a href="/laraveldemo/demo/demomap/hotel.html">網址連結</a> -->
+                            <a href="/hotel.html">網址連結</a>
                         </div>
                         <div class="col-4">
                             <img src='https://picsum.photos/100/100?random=33' alt="">

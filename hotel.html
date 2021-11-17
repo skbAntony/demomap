@@ -12,291 +12,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <title>reservation</title>
   <style type="text/css">
-    :root {
-      --asideleft: 300px;
-    }
-    body {
-      height: 100%;
-      width: 100%;
-    }
-    #vue {
-      position: relative;
-    }
-    .slideMenu {
-      width: var(--asideleft);
-      height: 100vh;
-      background-color: #fff;
-      position: fixed;
-      z-index: 2;
-      top: 0;
-      transition: transform 2s;
-      display: block;
-    }
-    .slide_untodo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: rgb(0, 255, 13);
-      cursor: pointer;
-      z-index: 2;
-      font-size: 40px;
-    }
-    .slideMenu h1 {
-      font-family: Futwora Pro Trial Bold;
-      padding: 0 0.5em;
-      margin: 50px 0;
-    }
-    .slideMenu a {
-      font-family: Futwora Pro Trial Bold;
-      color: #666;
-      text-decoration: none;
-      padding: 0.5em 0;
-      padding-left: 2em;
-    }
-    .menu_detail {
-      position: absolute;
-      bottom: 50px;
-      left: 30px;
-      font-family: Futwora Pro Trial Medium;
-      color: #666;
-      border-spacing: 10px 2px;
-      border-collapse:separate;
-    }
-    .room h2 {
-      color: #8c9a65;
-    }
-    .wrap {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      padding-left: var(--asideleft);
-      width: 100%;
-      height: 100vh;
-      transition: 2s;
-    }
-    .rooms {
-      position: relative;
-    }
-    .rooms_img {
-      width: 100%;
-      height: 50vh;
-      position: relative;
-    }
-    .rooms img {
-      width: 100%;
-      height: 100%;
-      vertical-align: middle;
-    }
-    .rooms .text {
-      /* position: absolute;
-      z-index: 1;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 140px;
-      background-color: hsla(0,0%,40%,.6);
-      color: #fff; */
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-      color: #fff;
-    }
-    .rooms:hover .more {
-      visibility: initial;
-      opacity: 1;
-    }
-    
-    .rooms:hover .text {
-      transition: background-color .3s;
-      background-color: hsla(0,0%,40%, .5);
-    }
-
-    .text h1 {
-      font-size: 26px;
-      font-family: Futwora Pro Trial Regular;
-      letter-spacing: .96px;
-    }
-    .detail_text {
-      margin-top: 60px;
-      text-align: center;
-    }
-    .detail_text p {
-      font-family: Futwora Pro Trial Medium;
-      letter-spacing: .64px;
-      font-size: 20px;
-      margin-bottom: 36px;
-    }
-    .detail_text p:nth-child(odd) {
-      margin: 0;
-    }
-    .more {
-      margin-top: 80px;
-      border: 3px solid #fff;
-      text-align: center;
-      padding: 8px 20px;
-      opacity: 0;
-      transition: opacity .3s,visibility .3s;
-      color: #fff;
-    }
-    .more:hover {
-      cursor: pointer;
-    }
-    
-    /* .loading {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      z-index: 2;
-      background-color: #fff;
-    } */
-    .fade-enter-active, .fade-leave-active {
-      transition: transform .5s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-      /* opacity: 0; */
-      transform: translate(100%, 0);
-    }
-    .fade-enter-to, .fade-leave /* .fade-leave-active below version 2.1.8 */ {
-      /* opacity: 1; */
-      transform: translate(-100%, 0);
-    }
-    .room .room_detail {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      padding: 54px 20px;
-      width: 100%;
-    }
-    .amenities .active {
-      opacity: 1;
-    }
-    .amenities .noactive {
-      opacity: .3;
-      text-decoration:line-through;
-    }
-    .descriptionShort {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .descriptionShort .item {
-      margin-bottom: 18px;
-    }
-    .amenities {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .amenities > div {
-      display: flex;
-      align-items: center;
-      padding: 0 6px;
-    }
-    .description {
-      color: #8c9a65;
-      padding-right: 30px;
-    }
-    .room {
-      display: flex;
-      padding-left: var(--asideleft);
-      width: 100%;
-      position: relative;
-      height: 100%;
-      flex-direction: column;
-      transition: padding-left 1s;
-    }
-    .room_img {
-      width: 100%;
-    }
-    .room_img img {
-      width: 100vw;
-      height: 640px;
-      display: block;
-      position: relative;
-    }
-    .room_data {
-      position: relative;
-    }
-    .room_data h2 {
-      position: absolute;
-      display: block;
-      font-size: 50px;
-      line-height: 60px;
-      font-family: Futwora Pro Trial Bold;
-      color: #8c9a65;
-      letter-spacing: 2px;
-      margin-top: -30px;
-      top: 0;
-      text-shadow: 0 -1px 0 #fffc97;
-      padding-left: 10px;
-      z-index: 2;
-    }
-    .item_title {
-      opacity: .5;
-    }
-    body::-webkit-scrollbar {
-      display:none;
-    }
-    .loading {
-      background-color: rgb(4, 255, 117);
-      width: 100vw;
-      height: 100vh;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 5;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: rgb(154, 19, 245);
-      font-size: 24px;
-    }
-    @media only screen and (max-width: 1300px) { 
-      #vue {
-        display: flex;
-        flex-direction: column;
-      }
-      .slideMenu {
-        height: 260px; 
-        position: relative;
-        width: 100%;
-      }
-      .slideMenu h1 {
-        margin: 26px 0;
-      }
-      .menu_detail {
-        top: 20px;
-        left: 120px;
-      }
-      .wrap {
-        grid-template-columns: repeat(1,1fr);
-        padding-left: unset;
-      }
-      .room .room_detail {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        padding: 54px 20px;
-        width: 100%;
-      }
-    }
-    @media only screen and (max-width: 768px) { 
-      
-    }
-    @media only screen and (max-width: 576px) { 
-
-    }
   </style>
 </head>
 <body>
   <div id="vue">
+    <!-- 回上一頁按鈕 -->
     <label v-show='isLabel' class='slide_untodo' @click="page_click">回上一頁</label>
+    <!-- 側邊攔 -->
     <aside class='slideMenu'>
       <h1>Hotel</h1>
       <a :href='url'>Home</a>
@@ -331,6 +53,8 @@
       <div class="loader-inner pacman"></div>
       <div>資料讀取中</div>
     </div>
+    <div class=""></div>
+    <!-- 六個房間 -->
     <transition name="fade">
       <main class="wrap" v-show='isShow'>
         <section class="rooms" v-for='(index, key) in api_data'>
@@ -352,6 +76,7 @@
         </section>
       </main>
     </transition>
+    <!-- 各個房間詳細資訊 -->
     <transition name="fade">
       <main class="room" v-show='!isShow'>
         <section class="room_img">
@@ -395,7 +120,6 @@
           </div>
         </section>
       </main>
-        
           <!-- <div v-for='index in room.imageUrl'>
             <p>{{index}}</p>
           </div> -->

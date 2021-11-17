@@ -19,10 +19,10 @@ $(function() {
                 dataType: 'json',
                 url: 'https://picsum.photos/v2/list',
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
                   data.forEach(function (element, index) {
                     var carousel = document.getElementsByClassName("carousel-inner");
-                    $(carousel[0]).append("<div class='carousel-item'><img class='d-block' src='https://picsum.photos/1200/300?random=" + index + "' alt='First slide'></div>");
+                    $(carousel[0]).append("<div class='carousel-item'><img class='d-block;' style='width: 100%;' src='https://picsum.photos/1200/300?random=" + index + "' alt='First slide'></div>");
                   });
                   //預設開頭第一張圖片
                   var carousel = document.getElementsByClassName("carousel-inner");
