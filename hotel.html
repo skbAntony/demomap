@@ -263,7 +263,7 @@
         flex-direction: column;
       }
       .slideMenu {
-        height: 220px; 
+        height: 260px; 
         position: relative;
         width: 100%;
       }
@@ -295,11 +295,15 @@
 </head>
 <body>
   <div id="vue">
-    <label v-show='isLabel' class='slide_untodo' @click="page_click">上一頁</label>
+    <label v-show='isLabel' class='slide_untodo' @click="page_click">回上一頁</label>
     <aside class='slideMenu'>
       <h1>Hotel</h1>
       <a :href='url'>Home</a>
       <table class='menu_detail'>
+        <tr>
+          <td colspan="2">練習範例資料來源：https://challenge.thef2e.com/
+          api/thef2e2019/stage6/rooms</td>
+        </tr>
         <tr>
           <td><i class="fa fa-phone" aria-hidden="true"></i></td>
           <td>0912 345 678</td>
