@@ -70,8 +70,8 @@ $(function() {
                 this.isShow = false;
                 this.isLabel = true;
                 var that = this;
-                document.querySelector('.slideMenu').style.cssText = 'transform: translateX(calc(-100% + 50px)); background-color: #8c9a65;';
-                document.querySelector('.room').style.cssText = 'padding-left: 49px';
+                document.querySelector('.slideMenu').style.cssText = 'transform: translateX(calc(-100%)); background-color: #8c9a65; display: none;';
+                document.querySelector('.room').style.cssText = 'padding-left: 0px';
                 
                 this.getRoom({headers:this.headers}, id).then(function(resp){
                     that.room = resp.data.room[0];
@@ -110,7 +110,7 @@ $(function() {
                     this.descriptionShort_text = [];
                     this.isShow = true;
                     this.isLabel = false;
-                    document.querySelector('.slideMenu').style.cssText = 'transform: translateX(0%);background-color: #fff;';
+                    document.querySelector('.slideMenu').style.cssText = 'transform: translateX(0%);background-color: #fff; display: block';
                     document.querySelector('.room').style.cssText = 'padding-left: var(--asideleft)';
                 }
             },
@@ -123,7 +123,7 @@ $(function() {
                 that.api_data = resp.data.items;
                 setTimeout(function(){
                     that.loading = false;
-                },1000);
+                },1500);
             }).catch(function(err){
                 that.error = true;
             });  

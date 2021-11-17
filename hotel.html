@@ -29,14 +29,17 @@
       position: fixed;
       z-index: 2;
       top: 0;
-      transition: transform .5s;
+      transition: transform 2s;
+      display: block;
     }
     .slide_untodo {
-      position: absolute;
+      position: fixed;
       top: 0;
-      right: 0;
+      left: 0;
       background-color: rgb(0, 255, 13);
       cursor: pointer;
+      z-index: 1;
+      font-size: 40px;
     }
     .slideMenu h1 {
       font-family: Futwora Pro Trial Bold;
@@ -68,6 +71,7 @@
       padding-left: var(--asideleft);
       width: 100%;
       height: 100vh;
+      transition: 2s;
     }
     .rooms {
       position: relative;
@@ -205,6 +209,7 @@
       position: relative;
       height: 100%;
       flex-direction: column;
+      transition: padding-left 1s;
     }
     .room_img {
       width: 100%;
@@ -229,6 +234,7 @@
       margin-top: -30px;
       top: 0;
       text-shadow: 0 -1px 0 #fffc97;
+      padding-left: 10px;
     }
     .item_title {
       opacity: .5;
@@ -257,7 +263,7 @@
         flex-direction: column;
       }
       .slideMenu {
-        height: 160px; 
+        height: 220px; 
         position: relative;
         width: 100%;
       }
@@ -271,7 +277,12 @@
       .wrap {
         grid-template-columns: repeat(1,1fr);
         padding-left: unset;
-        transition: 1s;
+      }
+      .room .room_detail {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 54px 20px;
+        width: 100%;
       }
     }
     @media only screen and (max-width: 768px) { 
@@ -284,10 +295,10 @@
 </head>
 <body>
   <div id="vue">
+    <label v-show='isLabel' class='slide_untodo' @click="page_click">上一頁</label>
     <aside class='slideMenu'>
       <h1>Hotel</h1>
       <a :href='url'>Home</a>
-      <label v-show='isLabel' class='slide_untodo' @click="page_click">上一頁</label>
       <table class='menu_detail'>
         <tr>
           <td><i class="fa fa-phone" aria-hidden="true"></i></td>
@@ -337,8 +348,8 @@
       </main>
     </transition>
     <transition name="fade">
-      <div class="room" v-show='!isShow'>
-        <div class="room_img">
+      <main class="room" v-show='!isShow'>
+        <section class="room_img">
           <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div v-for='(index, key) in room.imageUrl' :class="key === 0 ? 'carousel-item active' : 'carousel-item'">
@@ -346,13 +357,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <!-- <div class="room_check">
-          <div class="inputInfoContent">
-            
-          </div>
-        </div> -->
-        <div class="room_data">
+        </section>
+        <section class="room_data">
           <h2>{{room.name}}</h2>
           <div class='room_detail'>
             <div class="description">
@@ -374,9 +380,8 @@
               </div>
             </div>
           </div>
-        </div>
-        
-      </div>
+        </section>
+      </main>
         
           <!-- <div v-for='index in room.imageUrl'>
             <p>{{index}}</p>
