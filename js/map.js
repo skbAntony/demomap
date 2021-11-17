@@ -59,7 +59,7 @@ $(function() {
                 return L.icon({
                     // iconUrl: `http://localhost/laraveldemo/demo/demomap/images/mark-${type}.png`,
                     // github   
-                    iconUrl: `https://skbantony.github.io/demomap/images/mark-${type}.png`,    
+                    iconUrl: `https://skbantony.github.io/demomap/images/mark-` + type + `.png`,    
                     iconSize: [66, 90],
                     iconAnchor: [33, 90], // point of the icon which will correspond to marker's location
                     popupAnchor: [0, -80] // point from which the popup should open relative to the iconAnchor
