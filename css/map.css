@@ -1,7 +1,7 @@
 
 :root {
     --asidewidth: 450px;
-    --aside_header_height: 200px;
+    --aside_header_height: 250px;
 }
 ul {
     list-style-type: none;
@@ -48,6 +48,9 @@ aside {
     position: absolute;
     top: 0;
     left: 0;
+}
+aside p {
+    margin: 0;
 }
 aside header {
     background-color: #e5d97b;
@@ -128,5 +131,9 @@ aside .list .fa {
 @media only screen and (max-width: 576px) {
     :root {
         --asidewidth: 100%;
+    }
+    #vue label,
+    #vue p {
+        font-size: 13px;
     }
 }
